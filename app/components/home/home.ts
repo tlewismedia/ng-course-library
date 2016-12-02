@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {FormControl} from '@angular/forms';
+import {Course, CourseService} from '../../services/course-service';
 
 
 @Component({
@@ -15,10 +16,17 @@ import {FormControl} from '@angular/forms';
       </div>
     </div>
     <div class="row">
-      COURSES GO HERE
+      <div *ngFor="let course of courses" class="col-sm-4 col-lg-4 col-md-4">
+        - {{ course.title }}
+      </div>
     </div>
   `
 })
 export default class HomeComponent {
+  courses: Course[] = [];
+
+  constructor(private courseService: CourseService) {
+    this.courses = this.courseService.getCourses();
+  }
 
 }
